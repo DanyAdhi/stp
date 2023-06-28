@@ -46,7 +46,10 @@ class Auth extends CI_Controller
           }
           if ($user['role_id'] == 3) {
             $mentor = $this->db->get_where('detail_mentor', ['user_id' => $user['id']])->result();
-            $this->session->set_userdata(['mentor_id' => $mentor[0]->id ]);
+            $this->session->set_userdata([
+              'mentor_id'   => $mentor[0]->id,
+              'program_id'  => $mentor[0]->program_id
+            ]);
             redirect('pembimbing/dashboard');
           } else {
             redirect('user');
