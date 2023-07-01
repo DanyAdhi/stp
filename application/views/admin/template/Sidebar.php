@@ -14,7 +14,7 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item <?= ($page =='dashboard') ? 'active' : ''; ?>">
+  <li class="nav-item <?= ($page=='dashboard' || $page=='' ) ? 'active' : ''; ?>">
     <a class="nav-link" href="<?=base_url('admin/dashboard')?>">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
@@ -41,22 +41,22 @@
       </div>
     </div>
   </li>
-  <li class="nav-item <?= ($page =='pembimbing') ? 'active' : ''; ?>">
+  <li class="nav-item <?= ($page=='pembimbing') ? 'active' : ''; ?>">
     <a class="nav-link" href="<?=base_url('admin/pembimbing')?>">
       <i class="fas fa-user"></i>
       <span>Daftar Pembimbing</span></a>
   </li>
-  <li class="nav-item <?= ($page =='jadwal') ? 'active' : ''; ?>">
+  <li class="nav-item <?= ($page=='jadwal') ? 'active' : ''; ?>">
     <a class="nav-link" href="<?=base_url('admin/jadwal')?>">
       <i class="fas fa-list"></i>
       <span>Jadwal Program</span></a>
   </li>
-  <li class="nav-item <?= ($page =='periode') ? 'active' : ''; ?>">
+  <li class="nav-item <?= ($page=='periode') ? 'active' : ''; ?>">
     <a class="nav-link" href="<?=base_url('admin/periode')?>">
       <i class="fas fa-hourglass-end"></i>
       <span>Periode Program</span></a>
   </li>
-  <li class="nav-item <?= ($page =='progress') ? 'active' : ''; ?>">
+  <li class="nav-item <?= ($page=='progress') ? 'active' : ''; ?>">
     <a class="nav-link" href="<?=base_url('admin/progress')?>">
       <i class="fas fa-tasks"></i>
       <span>Progess Program</span></a>
@@ -66,8 +66,8 @@
   <!-- Divider -->
   <hr class="sidebar-divider my-0" />
 
-  <li class="nav-item">
-    <a class="nav-link" href=" <?= base_url('admin/gantipassword'); ?>">
+  <li class="nav-item <?= (strtolower($this->uri->segment(3)) =='change-password') ? 'active' : ''; ?>">
+    <a class="nav-link" href=" <?= base_url('admin/profile/change-password'); ?>">
       <i class="fas fa-cog"></i>
       <span>Ganti Password</span></a>
   </li>
