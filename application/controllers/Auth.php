@@ -52,7 +52,9 @@ class Auth extends CI_Controller
             ]);
             redirect('pembimbing/dashboard');
           } else {
-            redirect('user');
+            $member = $this->db->get_where('detail_member', ['user_id' => $user['id']])->result();
+            $this->session->set_userdata(['member_id' => $member[0]->id]);
+            redirect('peserta/dashboard');
           }
         } else {
             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah! </div> ');
@@ -70,11 +72,9 @@ class Auth extends CI_Controller
 
 
   // log out
-  public function logout()
-  {
-      $this->session->unset_userdata('namalengkap');
-      $this->session->unset_userdata('role_id');
-      $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> kamu sudah keluar! </div> ');
-      redirect('auth');
+  public function logout() {
+    $this->session->sess_destroy();
+    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert"> kamu sudah keluar! </div> ');
+    redirect('auth');
   }
 }
