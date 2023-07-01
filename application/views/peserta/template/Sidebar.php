@@ -14,7 +14,7 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item <?= ($page =='dashboard') ? 'active' : ''; ?>">
+  <li class="nav-item <?= ($page=='dashboard' ||$page='') ? 'active' : ''; ?>">
     <a class="nav-link" href="<?=base_url('peserta/dashboard')?>">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
@@ -28,12 +28,12 @@
     Peserta
   </div>
 
-  <li class="nav-item <?= ($page =='jadwal') ? 'active' : ''; ?>">
+  <li class="nav-item <?= ($page=='jadwal') ? 'active' : ''; ?>">
     <a class="nav-link" href="<?=base_url('peserta/jadwal')?>">
       <i class="fas fa-list"></i>
       <span>Jadwal Program</span></a>
   </li>
-  <li class="nav-item <?= ($page =='pembimbing') ? 'active' : ''; ?>">
+  <li class="nav-item <?= ($page=='pembimbing') ? 'active' : ''; ?>">
     <a class="nav-link" href="<?=base_url('peserta/pembimbing')?>">
       <i class="fas fa-tasks"></i>
       <span>Daftar Pembimbing</span></a>

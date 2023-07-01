@@ -5,6 +5,14 @@ class Auth extends CI_Controller
 {
   public function __construct() {
     parent::__construct();
+    if ($this->session->userdata('role_id') === 1) { 
+      redirect('admin'); 
+    } else if ($this->session->userdata('role_id') === 2) {
+      redirect('peserta'); 
+    } else if ($this->session->userdata('role_id') === 3) {
+      redirect('pembimbing'); 
+    }
+
     $this->load->library('form_validation');
   }
   public function index() {
