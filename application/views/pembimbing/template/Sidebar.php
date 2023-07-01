@@ -14,7 +14,7 @@
   <hr class="sidebar-divider my-0">
 
   <!-- Nav Item - Dashboard -->
-  <li class="nav-item <?= ($page =='dashboard') ? 'active' : ''; ?>">
+  <li class="nav-item <?= ($page =='dashboard' || $page == '') ? 'active' : ''; ?>">
     <a class="nav-link" href="<?=base_url('pembimbing/dashboard')?>">
       <i class="fas fa-fw fa-tachometer-alt"></i>
       <span>Dashboard</span></a>
@@ -48,8 +48,8 @@
   <!-- Divider -->
   <hr class="sidebar-divider my-0" />
 
-  <li class="nav-item">
-    <a class="nav-link" href=" <?= base_url('pembimbing/gantipassword'); ?>">
+  <li class="nav-item <?= (strtolower($this->uri->segment(3)) =='change-password') ? 'active' : ''; ?>">
+    <a class="nav-link" href=" <?= base_url('pembimbing/profile/change-password'); ?>">
       <i class="fas fa-cog"></i>
       <span>Ganti Password</span></a>
   </li>
