@@ -10,14 +10,14 @@
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
         <thead>
-            <tr>
-                <th width="25px">NO</th>
-                <th>Progres</th>
-                <th width="170px">Program</th>
-                <th width="170px">Pembimbing</th>
-                <th width="150px">Tanggal</th>
-                <th>Aksi</th>
-            </tr>
+          <tr>
+            <th width="25px">NO</th>
+            <th>Progres</th>
+            <th width="170px">Program</th>
+            <th width="170px">Pembimbing</th>
+            <th width="150px">Tanggal</th>
+            <th>Aksi</th>
+          </tr>
         </thead>
         <tbody>
           <?php 
