@@ -61,8 +61,6 @@ class Progress extends CI_Controller {
         redirect('admin/progress/print');
       }
     
-// var_dump($get_data[0]);die;
-      // title dari pdf
       $data = [ 
         'title'     => 'Laporan Progress Peserta',
         'program'   => $get_data[0]->program,
@@ -77,9 +75,7 @@ class Progress extends CI_Controller {
       $html = $this->load->view('admin/progress/report_pdf', $data, true);	    
       
       // run dompdf
-      $this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);
-
-      
+      $this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);      
     }
 
   }
