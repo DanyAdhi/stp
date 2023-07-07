@@ -2,9 +2,14 @@
 
 <div class="card shadow">
   <div class="card-header py-3 d-flex">
-      <div>
-        <h6 class=" font-weight-bold text-primary">Data Progres Program</h6>
-      </div>
+    <div>
+      <h6 class=" font-weight-bold text-primary">Data Progres Program</h6>
+    </div>
+    <div class="ml-auto">
+      <a class="btn btn-sm btn-primary text-light" href="<?=base_url('admin/progress/print')?>">
+        <i class="fa fa-print pr-2"></i> <b> Cetak</b>
+      </a>
+    </div>
   </div>
   <div class="card-body w-100">
     <div class="table-responsive">
