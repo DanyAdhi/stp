@@ -11,10 +11,14 @@ class Dashboard extends CI_Controller {
   }
 
   public function index() {
+    $get_data = $this->M_dashboard->get_detail_member($this->session->userdata('member_id'));
+    if (!$get_data) {
+      show_404();
+    }
 
     $data = [ 
       'content'   => 'peserta/dashboard/index',
-      'progress'  => $this->M_dashboard->get_progress_member($this->session->userdata('member_id')),
+      'progress'  => $this->M_dashboard->get_progress_member($get_data[0]->program_period_id),
     ];
 		$this->load->view('peserta/template/Template', $data);
   }
