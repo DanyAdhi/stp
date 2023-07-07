@@ -70,4 +70,18 @@ class M_peserta extends CI_Model {
                    ->result();
   }
 
+  public function get_program_period($program_period_id) {
+    return $this->db->get_where('program_period', ['id' => $program_period_id])->result();
+  }
+
+  public function get_progress_peserta($program_period_id) {
+    return $this->db->select('program_progress.*, detail_mentor.name AS mentor, program.name AS program')
+                    ->from('program_progress')
+                    ->join('detail_mentor', 'detail_mentor.id = program_progress.mentor_id')
+                    ->join('program', 'program.id = program_progress.program_id')
+                    ->where('program_progress.program_period_id', $program_period_id)
+                    ->get()
+                    ->result();
+  }
+
 }

@@ -8,7 +8,7 @@ class Peserta extends CI_Controller {
     if ($this->session->userdata('role_id') !== 1) { redirect('auth'); }
 
     $this->load->model(['Admin/M_peserta']);
-    $this->load->library(['form_validation', 'encryption']);
+    $this->load->library(['form_validation', 'encryption', 'Pdfgenerator']);
     $this->load->helper(['email']);
   }
 
@@ -186,7 +186,7 @@ class Peserta extends CI_Controller {
   }
 
   public function delete($user_id) {
-    if(!isset($user_id)) show_404();
+    if (!isset($user_id)) show_404();
     
     $user_id	=	str_replace(['-','_','~',],['=','+','/'], $user_id);
     $user_id	=	$this->encryption->decrypt($user_id);
@@ -208,6 +208,59 @@ class Peserta extends CI_Controller {
 			'content'		 => 'admin/peserta/archive',
 		];
 		$this->load->view('admin/template/Template', $data);
+  }
+
+  public function print_pdf($user_id=null) {
+    if (!isset($user_id)) {
+      $this->session->set_flashdata('close', '<div></div>');
+      redirect('admin/peserta/arsip');
+    };
+
+    $user_id	=	str_replace(['-','_','~',],['=','+','/'], $user_id);
+    $user_id	=	$this->encryption->decrypt($user_id);
+
+    if (!$user_id) {
+      $this->session->set_flashdata('close', '<div></div>');
+      redirect('admin/peserta/arsip');
+    }
+
+
+    $get_peserta = $this->M_peserta->get_one_peserta($user_id);
+    if (!$get_peserta) {
+      $this->session->set_flashdata('close', '<div></div>');
+      redirect('admin/peserta/arsip');
+    }
+
+    $get_program_period = $this->M_peserta->get_program_period($get_peserta[0]->program_period_id);
+    if (!$get_program_period) {
+      $this->session->set_flashdata('close', '<div></div>');
+      redirect('admin/peserta/arsip');
+    }
+
+    $get_perogress = $this->M_peserta->get_progress_peserta($get_peserta[0]->program_period_id);
+    if (!$get_perogress) {
+      $this->session->set_flashdata('close', '<div></div>');
+      redirect('admin/peserta/arsip');
+    }
+
+    $data = [ 
+      'title'           => 'Laporan Progress Peserta',
+      'program_period'  => $get_program_period[0],
+      'peserta'         => $get_peserta[0],
+      'progress'        => $get_perogress 
+    ];
+      
+    $file_pdf = 'Laporan_Progress_Peserta';
+    $paper = 'A4';
+    $orientation = "portrait";
+    
+    $html = $this->load->view('admin/peserta/report_pdf', $data, true);	    
+    
+    // run dompdf
+    $this->pdfgenerator->generate($html, $file_pdf, $paper, $orientation);   
+
+
+
   }
 
 
